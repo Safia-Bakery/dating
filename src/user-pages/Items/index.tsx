@@ -19,7 +19,7 @@ const Items = () => {
               key={item.id}
               className={cl(
                 "w-36 py-6 flex justify-center bg-primary rounded-2xl text-white transition-colors",
-                { ["bg-[#0DA700]"]: id && +id === item.id }
+                { ["!bg-[#0DA700]"]: id && +id === item.id }
               )}
             >
               {t(item.name)}
@@ -31,12 +31,13 @@ const Items = () => {
         <h3 className="font-bold">{t("raw_materials")}</h3>
         <div className="w-full my-3 gap-4 flex-wrap px-6 grid grid-cols-4 overflow-y-auto">
           {[...Array(20)].map((_, idx) => (
-            <div
+            <Link
+              to={`${id}/${idx}`}
               className="border border-[#F5E7C7] bg-white font-bold rounded-2xl w-full h-24 flex items-center justify-center flex-1 min-w-[200px] cursor-pointer"
               key={idx}
             >
               apple
-            </div>
+            </Link>
           ))}
         </div>
       </div>

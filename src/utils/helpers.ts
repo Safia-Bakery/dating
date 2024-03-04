@@ -1,3 +1,4 @@
+import useQueryString from "@/hooks/custom/useQueryString";
 import { QueryClient } from "@tanstack/react-query";
 
 export enum EPresetTimes {
@@ -8,6 +9,7 @@ export enum EPresetTimes {
   WEEK = DAY * 7,
   TEN_DAYS = DAY * 10,
 }
+export const itemsPerPage = 50;
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,7 +23,19 @@ export const queryClient = new QueryClient({
   },
 });
 
+export const handleIdx = (index: number) => {
+  const currentPage = Number(useQueryString("page")) || 1;
+  if (currentPage === 1) return index + 1;
+  else return index + 1 + itemsPerPage * (currentPage - 1);
+};
+
 export const MockCategories = [
   { id: 1, name: "all" },
   { id: 2, name: "products" },
 ];
+
+export const isMobile = window.innerWidth <= 960;
+
+export const dateTimeFormat = "DD.MM.YYYY HH:mm";
+export const dateMonthYear = "DD.MM.YYYY";
+export const yearMonthDate = "YYYY-MM-DD";

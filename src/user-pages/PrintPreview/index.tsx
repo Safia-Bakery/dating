@@ -40,19 +40,20 @@ const PrintPreview = () => {
       </div>
     );
   }, []);
+
   return (
-    <>
-      <Container className="bg-[#ECECEC] rounded-xl flex flex-1 max-h-[70vh] h-full min-h-[700px]">
-        <div className="flex items-center justify-center gap-8 flex-1 max-h-[260px]">
+    <div className="absolute left-0 right-0 -translate-y-1/2 top-1/2">
+      <Container className="bg-[#ECECEC] rounded-xl flex flex-1 max-h-[50vh] h-full min-h-[400px]">
+        <div className="flex items-center justify-center gap-14 flex-1 max-h-[260px] m-auto max-w-2xl">
           {renderLeft}
-          <div className="py-10 px-8 flex flex-col justify-between bg-[#CCCCCC] rounded-[20px] items-center flex-1">
+          <div className="py-10 !h-full px-8 flex flex-col justify-between bg-[#CCCCCC] rounded-[20px] items-center flex-1">
             <button
               className="text-[50px] cursor-pointer leading-10"
               onClick={handleDecrement}
             >
               -
             </button>
-            <span className="text-[50px] ">{count}</span>
+            <span className="text-[50px]">{count}</span>
             <button
               className="text-[50px] cursor-pointer leading-10"
               onClick={handleIncrement}
@@ -62,7 +63,16 @@ const PrintPreview = () => {
           </div>
         </div>
       </Container>
-    </>
+
+      <Container className="bg-[#F3F3F3] rounded-xl flex flex-[5] mt-5 gap-6 px-10">
+        <button className="bg-[#8CA0AF] rounded-3xl border-2 border-[#8CA0AF] flex flex-[2] text-white justify-center py-4 text-3xl">
+          {t("back")}
+        </button>
+        <button className="bg-primary rounded-3xl border-2 border-[#797EFF] flex flex-[2] text-white justify-center py-4 text-3xl">
+          {t("print")}
+        </button>
+      </Container>
+    </div>
   );
 };
 

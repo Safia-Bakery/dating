@@ -4,10 +4,12 @@ import { Language } from "@/utils/types";
 
 interface State {
   lang: Language;
+  sidebarToggler: boolean;
 }
 
 const initialState: State = {
   lang: Language.ru,
+  sidebarToggler: false,
 };
 
 export const languageReducer = createSlice({
@@ -17,10 +19,15 @@ export const languageReducer = createSlice({
     changeLanguage: (state, { payload }: PayloadAction<Language>) => {
       state.lang = payload;
     },
+    sidebarHandler: (state, { payload }: PayloadAction<boolean>) => {
+      state.sidebarToggler = payload;
+    },
   },
 });
 
 export const langSelector = (state: RootState) => state.language.lang;
+export const toggleSidebar = (state: RootState) =>
+  state.language.sidebarToggler;
 
-export const { changeLanguage } = languageReducer.actions;
+export const { changeLanguage, sidebarHandler } = languageReducer.actions;
 export default languageReducer.reducer;

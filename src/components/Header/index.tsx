@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { Language } from "@/utils/types";
 import { useAppDispatch, useAppSelector } from "@/store/rootConfig";
-import { changeLanguage, langSelector } from "@/store/reducers/language";
+import { changeLanguage, langSelector } from "@/store/reducers/selects";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {

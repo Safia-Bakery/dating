@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { Outlet } from "react-router-dom";
 
-const WebUsers = () => {
+const UserRoutes = () => {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ const WebUsers = () => {
   );
 };
 
-export default WebUsers;
+export default UserRoutes;

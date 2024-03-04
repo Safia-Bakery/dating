@@ -12,7 +12,7 @@ const Loading: FC<Props> = ({ absolute = false, className }) => {
     <div
       className={cl(className, styles.wrap, { [styles.absolute]: absolute })}
     >
-      <img src="/assets/images/loader.gif" alt="loading..." />
+      <img src="/images/loader.gif" alt="loading..." />
     </div>
   );
 };
