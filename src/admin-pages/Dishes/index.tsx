@@ -14,6 +14,7 @@ import { dateMonthYear, handleIdx, yearMonthDate } from "@/utils/helpers";
 import ItemsCount from "@/components/ItemsCount";
 import AdminHeader from "@/components/AdminHeader";
 import TableViewBtn from "@/components/TableViewBtn";
+import Button from "@/components/Button";
 
 const column = [
   { name: "№", key: "" },
@@ -59,12 +60,13 @@ const Dishes = () => {
   return (
     <Card>
       <AdminHeader title={t("dishes")}>
-        <button
+        <Button
+          green
           onClick={() => navigate("add")}
           className="btn btn-success btn-fill"
         >
           {t("add")}
-        </button>
+        </Button>
       </AdminHeader>
 
       <div className="w-full p-4">
