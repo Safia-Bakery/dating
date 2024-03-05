@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 
 type Props = {
   green?: boolean;
-  text: string;
   className: string;
   children: ReactNode;
   onClick: () => void;
