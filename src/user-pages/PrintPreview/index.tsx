@@ -18,27 +18,27 @@ const PrintPreview = () => {
       <div
         ref={ref}
         id="printElement"
-        className="bg-white px-4 py-3 rounded-[40px] pb-4 flex flex-col flex-[20]"
+        className="bg-white p-[1mm] rounded-[40px] flex flex-col w-[56mm] h-[40mm] "
       >
-        <h2 className="text-center text-l mb-6">Банан</h2>
+        <h2 className="text-center text-l mb-[2mm]">Банан</h2>
 
         <div className="flex justify-between items-center">
-          <span className="text-[3mm]">{t("date_from")}</span>
-          <span className="text-[3mm]">22.02.2024 12:00</span>
+          <span className="text-[2mm]">{t("date_from")}</span>
+          <span className="text-[2mm]">22.02.2024 12:00</span>
         </div>
-        <div className="flex justify-between items-center mt-2">
-          <span className="text-[3mm]">{t("date_expire")}</span>
-          <span className="text-[3mm]">27.02.2024 12:00</span>
+        <div className="flex justify-between items-center mt-[2mm]">
+          <span className="text-[2mm]">{t("date_expire")}</span>
+          <span className="text-[2mm]">27.02.2024 12:00</span>
         </div>
 
-        <div className="flex gap-2 items-center w-full mt-5 justify-center">
-          <div className="w-7 h-7">
-            <QRCode value="fu*k" size={30} />
+        <div className="flex gap-2 items-center w-full mt-[2mm] justify-center">
+          <div className="w-[15mm] h-[15mm]">
+            <QRCode value="fu*k" size={50} className="w-full" />
           </div>
-          <p className="text-[2mm] max-w-[260px]">
-            Хранить при температуре от +5°C до +25°C. Избегать прямого
-            солнечного света. Соблюдать срок годности. Хранить в сухом месте.
-            При необходимости, хранить в оригинальной упаковке.
+          <p className="text-[1.5mm] max-w-[25mm]">
+            3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Voluptates, quae aut autem consequatur inventore voluptate aliquid
+            dolorem nulla modi amet doloribus eos soluta iusto esse iure
           </p>
         </div>
       </div>
