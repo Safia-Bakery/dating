@@ -1,19 +1,32 @@
 {
   "name": "dating",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.1.0",
+  "description": "Dating app",
+  "author": {
+    "name": "Nurmuhammad"
+  },
+  "main": "./dist/main.js",
   "scripts": {
     "start": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "serve": "vite preview",
+    "electron": "wait-on tcp:3000 && cross-env IS_DEV=true electron .",
+    "electron:pack": "electron-builder --dir",
+    "electron:dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron\"",
+    "electron:builder": "electron-builder",
+    "build:for:electron": "tsc --noEmit && cross-env ELECTRON=true vite build",
+    "electron:build": "vite build && electron-builder -c.extraMetadata.main=dist/main.js",
+    "app:build": "yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "@tanstack/react-query": "^5.24.1",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.11.10",
     "i18next": "^23.10.0",
     "pdf-lib": "^1.17.1",
@@ -30,7 +43,8 @@
     "react-toastify": "^10.0.4",
     "redux-persist": "^6.0.0",
     "sass": "^1.71.1",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "wait-on": "^7.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",
@@ -39,9 +53,13 @@
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",
+    "electron": "^29.1.1",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "react-scripts": "^5.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
   }
