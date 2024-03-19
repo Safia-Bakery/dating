@@ -1,33 +1,40 @@
 import { lazy, useEffect } from "react";
 import i18n from "./localization";
-import { useAppSelector } from "./store/rootConfig";
+import { useAppDispatch, useAppSelector } from "./store/rootConfig";
 import { langSelector } from "@/store/reducers/selects";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Suspend from "./components/Suspend";
-import Dishes from "./admin-pages/Dishes";
+import { logoutHandler, tokenSelector } from "./store/reducers/auth";
+import useToken from "@/hooks/useToken";
+import Loading from "./components/Loader";
+import "dayjs/locale/ru";
+import "react-datepicker/dist/react-datepicker.css";
 
-const Login = lazy(() => import("@/user-pages/Login"));
-const UserRoutes = lazy(() => import("@/components/UserRoutes"));
+const Login = lazy(() => import("@/pages/Login"));
 const AdminRoutes = lazy(() => import("@/components/AdminRoutes"));
-const Items = lazy(() => import("@/user-pages/Items"));
-const PrintPreview = lazy(() => import("@/user-pages/PrintPreview"));
+const EditAddProducts = lazy(() => import("@/pages/EditAddProducts"));
+const Products = lazy(() => import("@/pages/Products"));
+const Groups = lazy(() => import("@/pages/Groups"));
+const Templates = lazy(() => import("@/pages/Templates"));
 
 const App = () => {
   const lang = useAppSelector(langSelector);
+  const token = useAppSelector(tokenSelector);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   if (!token) navigate("/login");
-  //   if (!!error) dispatch(logoutHandler());
-  // }, [token, error]);
+  const { error, data: user, isLoading } = useToken({});
 
   useEffect(() => {
-    navigate("/users/items");
-  }, []);
+    if (!token) navigate("/login");
+    if (!!error) dispatch(logoutHandler());
+  }, [token, error]);
 
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <Routes>
@@ -39,40 +46,6 @@ const App = () => {
         }
         path={"/login"}
       />
-      <Route
-        element={
-          <Suspend>
-            <UserRoutes />
-          </Suspend>
-        }
-        path={"/users"}
-      >
-        <Route
-          path={"items"}
-          element={
-            <Suspend>
-              <Items />
-            </Suspend>
-          }
-        >
-          <Route
-            path={":id"}
-            element={
-              <Suspend>
-                <Items />
-              </Suspend>
-            }
-          />
-        </Route>
-        <Route
-          path={"items/:id/:checkid"}
-          element={
-            <Suspend>
-              <PrintPreview />
-            </Suspend>
-          }
-        />
-      </Route>
 
       <Route
         element={
@@ -80,13 +53,45 @@ const App = () => {
             <AdminRoutes />
           </Suspend>
         }
-        path={"/admin"}
+        path={"/"}
       >
         <Route
-          path={"dishes"}
+          path={"products"}
           element={
             <Suspend>
-              <Dishes />
+              <Products />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"templates"}
+          element={
+            <Suspend>
+              <Templates />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"groups"}
+          element={
+            <Suspend>
+              <Groups />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"groups/:id"}
+          element={
+            <Suspend>
+              <Products />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"products/:id"}
+          element={
+            <Suspend>
+              <EditAddProducts />
             </Suspend>
           }
         />

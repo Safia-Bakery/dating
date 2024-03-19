@@ -9,7 +9,7 @@ interface Props extends PropsWithChildren {
 
 const Card: FC<Props> = ({ children, className }) => {
   return (
-    <Container admin>
+    <Container>
       <div className={cl(className, styles.card)}>{children}</div>
     </Container>
   );

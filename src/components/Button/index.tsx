@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 
 type Props = {
   green?: boolean;
-  className: string;
+  className?: string;
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
+  type?: "submit" | "reset" | "button";
 };
 
 const Button = ({ green, children, className = "", ...others }: Props) => {

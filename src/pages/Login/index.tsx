@@ -1,7 +1,7 @@
 import BaseInput from "@/components/BaseInputs";
 import MainInput from "@/components/BaseInputs/MainInput";
 import Loading from "@/components/Loader";
-import loginMutation from "@/hooks/mutation/loginMutation";
+import loginMutation from "@/hooks/mutation/login";
 import { loginHandler, tokenSelector } from "@/store/reducers/auth";
 import { useAppDispatch, useAppSelector } from "@/store/rootConfig";
 import { successToast } from "@/utils/toast";
@@ -45,7 +45,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (token) navigate("/");
+    if (token) navigate("/groups");
   }, [token]);
 
   //   if (isPending) return <Loading absolute />;
@@ -69,7 +69,9 @@ const Login = () => {
           <BaseInput error={errors.login}>
             <MainInput
               placeholder={"login"}
-              register={register("login", { required: t("required_field") })}
+              register={register("username", {
+                required: t("required_field"),
+              })}
             />
           </BaseInput>
           <BaseInput error={errors.password}>
@@ -95,7 +97,7 @@ const Login = () => {
         </div>
       </div>
 
-      {isPending && <Loading absolute />}
+      {isPending && <Loading />}
     </div>
   );
 };

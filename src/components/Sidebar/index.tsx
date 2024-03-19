@@ -9,8 +9,8 @@ import { sidebarHandler, toggleSidebar } from "@/store/reducers/selects";
 
 const routes = [
   {
-    name: "dishes",
-    url: "/dishes",
+    name: "groups",
+    url: "/groups",
     icon: "/images/dish.png",
   },
   {

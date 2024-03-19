@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 
 interface Props extends PropsWithChildren {
   column: { name: string; key: any; center?: boolean }[];
-  data?: any[];
-  onSort?: (arg: any[] | undefined) => void;
+  data?: any;
+  onSort?: (arg: any | undefined) => void;
 }
 
 const TableHead: FC<Props> = ({ column, children, data, onSort }) => {

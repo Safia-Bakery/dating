@@ -20,7 +20,7 @@ const loginMutation = () => {
         .then(({ data }) => data as unknown as LoginTypes),
 
     onError: (e) => errorToast(e.message),
-    retry: 3,
+    retry: 2,
     retryDelay: 1000,
   });
 };

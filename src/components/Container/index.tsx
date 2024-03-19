@@ -4,14 +4,11 @@ import styles from "./index.module.scss";
 interface Props {
   children: ReactNode;
   className?: string;
-  admin?: boolean;
 }
 
-const Container: FC<Props> = ({ children, className = "", admin = false }) => {
+const Container: FC<Props> = ({ children, className = "" }) => {
   return (
-    <div className={`${className} ${styles.container} ${admin ? "pl-24" : ""}`}>
-      {children}
-    </div>
+    <div className={`${className} ${styles.container} !pl-24`}>{children}</div>
   );
 };
 

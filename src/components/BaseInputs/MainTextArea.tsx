@@ -21,7 +21,7 @@ const MainTextArea: FC<Props> = ({
 }) => {
   return (
     <textarea
-      className={cl(className, "form-control mb-2 h-100", styles.textArea)}
+      className={cl(className, styles.textArea, styles.inputBox)}
       rows={4}
       placeholder={placeholder || ""}
       {...register}
