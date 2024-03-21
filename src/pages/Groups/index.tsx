@@ -15,6 +15,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ProductType } from "@/utils/types";
 import VirtualTable from "@/components/VirtualTable";
 import TableViewBtn from "@/components/TableViewBtn";
+import dayjs from "dayjs";
+import { dateTimeFormat } from "@/utils/helpers";
+import GroupsFilter from "./filter";
 
 const InventoryRemains = () => {
   const { t } = useTranslation();
@@ -23,6 +26,7 @@ const InventoryRemains = () => {
 
   const parent_id = useQueryString("parent_id");
   const parent_name = useQueryString("parent_name");
+  const name = useQueryString("name");
 
   const columns = useMemo<ColumnDef<ProductType>[]>(
     () => [
@@ -37,16 +41,30 @@ const InventoryRemains = () => {
       {
         accessorKey: "name",
         header: t("name_in_table"),
-        cell: (info) => info.getValue(),
       },
       {
         accessorKey: "validity",
         header: t("date_expire"),
       },
       {
+        accessorKey: "qr",
+        header: t("value_for_qr"),
+        cell: ({ row }) =>
+          !!row.original.qr ? row.original.qr : t("not_given"),
+      },
+      {
         accessorKey: "updated_at",
         header: t("sync_date"),
-        // size: 80,
+        cell: ({ row }) =>
+          row?.original?.updated_at
+            ? dayjs(row?.original?.updated_at).format(dateTimeFormat)
+            : t("not_given"),
+      },
+      {
+        accessorKey: "status",
+        header: t("status"),
+        cell: ({ row }) =>
+          !!row.original.status ? t("active") : t("inactive"),
       },
       {
         accessorKey: "action",
@@ -73,7 +91,10 @@ const InventoryRemains = () => {
     isFetching: productFetching,
     data,
     isLoading: productLoading,
-  } = useProducts({ ...(!!parent_id && { parent_id }) });
+  } = useProducts({
+    ...(!!parent_id && { parent_id }),
+    ...(!!name && { name }),
+  });
 
   const goBack = () => navigate(-1);
 
@@ -82,7 +103,9 @@ const InventoryRemains = () => {
 
   const renderItems = useMemo(() => {
     return (
-      <VirtualTable columns={columns} data={data?.products} className="mt-5" />
+      <VirtualTable columns={columns} data={data?.products} className="mt-5">
+        <GroupsFilter />
+      </VirtualTable>
     );
   }, [data?.products]);
 
@@ -109,7 +132,6 @@ const InventoryRemains = () => {
         ))}
         <hr />
         {renderItems}
-        {/* <VirtualTable columns={columns} data={data?.products} /> */}
       </ul>
 
       {!data?.products?.length && <EmptyList />}

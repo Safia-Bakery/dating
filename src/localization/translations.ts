@@ -34,6 +34,12 @@ const localization = {
       created_at: "Создано",
       empty_list: "Список пуст",
       main: "Главная",
+      not_given: "Не задано",
+      status: "Статус",
+      active: "Активный",
+      inactive: "Не активный",
+      description: "Описание",
+      value_for_qr: "Значение для QR",
     },
   },
   uz: {

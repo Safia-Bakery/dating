@@ -15,7 +15,6 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const token = useAppSelector(tokenSelector);
-  //   const { refetch, isFetching: tokenLoading } = useToken({});
   const [error, $error] = useState(false);
 
   const {
@@ -35,7 +34,6 @@ const Login = () => {
       {
         onSuccess: (data) => {
           dispatch(loginHandler(data.access_token));
-          //   refetch();
           successToast(t("welcome"));
           if (error) $error(false);
         },

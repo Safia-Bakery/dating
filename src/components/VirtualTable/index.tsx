@@ -8,15 +8,26 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import React, { useState } from "react";
+import { ReactNode, useRef, useState } from "react";
+
+type ReturnFunction<Tval> = (smt: Tval) => string;
+type RowClassName<T> = string | ReturnFunction<T>;
 
 interface Props<TData> {
   data?: TData[];
   columns: ColumnDef<TData, any>[];
   className?: string;
+  children?: ReactNode;
+  rowClassName?: RowClassName<Row<TData>>;
 }
 
-function VirtualTable<T>({ data, columns, className }: Props<T>) {
+function VirtualTable<T>({
+  data,
+  columns,
+  className,
+  children,
+  rowClassName,
+}: Props<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -33,7 +44,10 @@ function VirtualTable<T>({ data, columns, className }: Props<T>) {
 
   const { rows } = table.getRowModel();
 
-  const parentRef = React.useRef<HTMLDivElement>(null);
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const handleRowStyles = (item: Row<T>) =>
+    typeof rowClassName === "function" ? rowClassName?.(item) : rowClassName;
 
   const virtualizer = useVirtualizer({
     count: rows.length,
@@ -44,8 +58,11 @@ function VirtualTable<T>({ data, columns, className }: Props<T>) {
 
   return (
     <div ref={parentRef} className={`${className} w-full`}>
-      <div style={{ height: `${virtualizer.getTotalSize()}px` }}>
-        <table>
+      <div
+        style={{ height: `${virtualizer.getTotalSize() + 120}px` }}
+        className="overflow-x-auto"
+      >
+        <table className="table table-bordered">
           <thead>
             {data &&
               table.getHeaderGroups().map((headerGroup) => (
@@ -82,12 +99,14 @@ function VirtualTable<T>({ data, columns, className }: Props<T>) {
                   })}
                 </tr>
               ))}
+            {children && <tr>{children}</tr>}
           </thead>
           <tbody>
             {virtualizer.getVirtualItems().map((virtualRow, index) => {
               const row = rows[virtualRow.index] as Row<T>;
               return (
                 <tr
+                  className={`${handleRowStyles(row)}`}
                   key={row.id}
                   style={{
                     height: `${virtualRow.size}px`,

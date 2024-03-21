@@ -23,7 +23,7 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { error, data: user, isLoading } = useToken({});
+  const { error, isLoading } = useToken({});
 
   useEffect(() => {
     if (!token) navigate("/login");

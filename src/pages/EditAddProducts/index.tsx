@@ -13,6 +13,7 @@ import Header from "@/components/AdminHeader";
 import groupsMutation from "@/hooks/mutation/groups";
 import useQueryString from "@/hooks/custom/useQueryString";
 import Button from "@/components/Button";
+import productMutation from "@/hooks/mutation/product";
 
 const EditAddProducts = () => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const EditAddProducts = () => {
   const data = useQueryString("data");
   const product = !!data && JSON.parse(data);
 
-  const { mutate } = groupsMutation();
+  const { mutate } = productMutation();
 
   const {
     register,
@@ -33,13 +34,14 @@ const EditAddProducts = () => {
   } = useForm();
 
   const onSubmit = () => {
-    const { status, validity, description } = getValues();
+    const { status, validity, description, qr } = getValues();
     mutate(
       {
-        status,
-        validity,
+        status: +status,
+        validity: +validity,
         description,
         id: id!,
+        qr,
       },
       {
         onSuccess: () => {
@@ -57,6 +59,7 @@ const EditAddProducts = () => {
         description: product.description,
         status: !!product.status,
         validity: product.validity,
+        qr: product.qr,
       });
     }
   }, [id, data]);
@@ -76,7 +79,9 @@ const EditAddProducts = () => {
             register={register("validity", { required: t("required_field") })}
           />
         </BaseInputs>
-
+        <BaseInputs label="value_for_qr">
+          <MainInput register={register("qr")} />
+        </BaseInputs>
         <BaseInputs label="description">
           <MainTextArea register={register("description")} />
         </BaseInputs>

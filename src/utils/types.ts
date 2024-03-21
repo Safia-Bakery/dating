@@ -29,6 +29,7 @@ export type ProductType = {
   amount_left: null | number;
   created_at: string | null;
   description: string | null;
+  qr: string;
 };
 
 export type GroupType = {

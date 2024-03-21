@@ -4,7 +4,9 @@ import apiClient from "@/main";
 interface Body {
   validity: number;
   status?: number;
-  id?: number;
+  id?: string;
+  description?: string;
+  qr: string;
 }
 
 const productMutation = () => {
