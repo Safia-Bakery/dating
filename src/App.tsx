@@ -16,6 +16,8 @@ const EditAddProducts = lazy(() => import("@/pages/EditAddProducts"));
 const Products = lazy(() => import("@/pages/Products"));
 const Groups = lazy(() => import("@/pages/Groups"));
 const Templates = lazy(() => import("@/pages/Templates"));
+const Categories = lazy(() => import("@/pages/Categories"));
+const EditAddCategory = lazy(() => import("@/pages/EditAddCategory"));
 
 const App = () => {
   const lang = useAppSelector(langSelector);
@@ -76,6 +78,30 @@ const App = () => {
           element={
             <Suspend>
               <Groups />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"categories"}
+          element={
+            <Suspend>
+              <Categories />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"categories/:id"}
+          element={
+            <Suspend>
+              <EditAddCategory />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"categories/add"}
+          element={
+            <Suspend>
+              <EditAddCategory />
             </Suspend>
           }
         />

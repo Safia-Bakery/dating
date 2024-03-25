@@ -20,6 +20,11 @@ const routes = [
     param: "",
   },
   {
+    name: "categories",
+    url: "/categories",
+    icon: "/icons/categories.svg",
+  },
+  {
     name: "templates",
     url: "/templates",
     icon: "/images/templates.png",

@@ -1,14 +1,12 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import Card from "@/components/Card";
-import TableHead from "@/components/TableHead";
-import useQueryString from "custom/useQueryString";
 import EmptyList from "@/components/EmptyList";
 import Loading from "@/components/Loader";
 import { useTranslation } from "react-i18next";
-import { dateMonthYear, handleIdx } from "@/utils/helpers";
+import { dateTimeFormat } from "@/utils/helpers";
 import AdminHeader from "@/components/AdminHeader";
 import useProducts from "@/hooks/useProducts";
 import { ProductType } from "@/utils/types";
@@ -16,14 +14,6 @@ import TableViewBtn from "@/components/TableViewBtn";
 import Button from "@/components/Button";
 import { ColumnDef } from "@tanstack/react-table";
 import VirtualTable from "@/components/VirtualTable";
-
-const column = [
-  { name: "№", key: "" },
-  { name: "name_in_table", key: "id", center: false },
-  { name: "date_expire", key: "fillial.name" },
-  { name: "sync_date", key: "fillial.name" },
-  { name: "", key: "" },
-];
 
 const Products = () => {
   const { t } = useTranslation();
@@ -53,6 +43,10 @@ const Products = () => {
       {
         accessorKey: "updated_at",
         header: t("sync_date"),
+        cell: ({ row }) =>
+          row?.original?.updated_at
+            ? dayjs(row?.original?.updated_at).format(dateTimeFormat)
+            : t("not_given"),
         // size: 80,
       },
       {

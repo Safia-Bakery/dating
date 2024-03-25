@@ -7,6 +7,7 @@ interface Body {
   id?: string;
   description?: string;
   qr: string;
+  category_id?: number;
 }
 
 const productMutation = () => {

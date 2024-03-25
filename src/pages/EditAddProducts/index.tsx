@@ -14,6 +14,8 @@ import groupsMutation from "@/hooks/mutation/groups";
 import useQueryString from "@/hooks/custom/useQueryString";
 import Button from "@/components/Button";
 import productMutation from "@/hooks/mutation/product";
+import MainSelect from "@/components/BaseInputs/MainSelect";
+import useCategories from "@/hooks/useCategories";
 
 const EditAddProducts = () => {
   const { t } = useTranslation();
@@ -22,6 +24,8 @@ const EditAddProducts = () => {
   const goBack = () => navigate(-1);
   const data = useQueryString("data");
   const product = !!data && JSON.parse(data);
+
+  const { data: categories } = useCategories({});
 
   const { mutate } = productMutation();
 
@@ -34,7 +38,7 @@ const EditAddProducts = () => {
   } = useForm();
 
   const onSubmit = () => {
-    const { status, validity, description, qr } = getValues();
+    const { status, validity, description, qr, category } = getValues();
     mutate(
       {
         status: +status,
@@ -42,6 +46,7 @@ const EditAddProducts = () => {
         description,
         id: id!,
         qr,
+        category_id: category,
       },
       {
         onSuccess: () => {
@@ -60,6 +65,7 @@ const EditAddProducts = () => {
         status: !!product.status,
         validity: product.validity,
         qr: product.qr,
+        category: product.category_id,
       });
     }
   }, [id, data]);
@@ -84,6 +90,13 @@ const EditAddProducts = () => {
         </BaseInputs>
         <BaseInputs label="description">
           <MainTextArea register={register("description")} />
+        </BaseInputs>
+
+        <BaseInputs label="category">
+          <MainSelect
+            register={register("category")}
+            values={categories?.items}
+          />
         </BaseInputs>
 
         <BaseInputs label="status">

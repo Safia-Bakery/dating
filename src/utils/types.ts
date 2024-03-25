@@ -1,8 +1,12 @@
-import { type } from "os";
-
 export enum Language {
   ru = "ru",
   uz = "uz",
+}
+export interface BasePaginate {
+  total: number;
+  page: number;
+  size: number;
+  pages: number;
 }
 export type MeTypes = {
   id: number;
@@ -47,4 +51,14 @@ export type GroupType = {
 export interface ProductGroupTypes {
   groups: GroupType[];
   products: ProductType[];
+}
+
+export interface CategoriesType extends BasePaginate {
+  items: CategoryType[];
+}
+
+export interface CategoryType {
+  id: number;
+  name: string;
+  status?: number;
 }

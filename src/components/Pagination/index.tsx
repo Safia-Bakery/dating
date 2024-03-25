@@ -15,8 +15,6 @@ const Pagination: FC<PaginationProps> = ({ totalPages = 1 }) => {
   const handleChange = ({ selected }: { selected: number }) =>
     navigate({ page: selected + 1 });
 
-  if (totalPages < 2) return;
-
   return (
     <nav>
       <ReactPaginate
@@ -30,7 +28,7 @@ const Pagination: FC<PaginationProps> = ({ totalPages = 1 }) => {
         breakLinkClassName="page-link"
         onPageChange={handleChange}
         pageRangeDisplayed={2}
-        className="pagination"
+        className="pagination mt-4"
         activeClassName="active"
         pageLinkClassName="page-link"
         pageCount={totalPages!}

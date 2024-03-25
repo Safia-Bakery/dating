@@ -40,6 +40,11 @@ const localization = {
       inactive: "Не активный",
       description: "Описание",
       value_for_qr: "Значение для QR",
+      shown_items: "Показаны записи",
+      from: "из",
+      edit_category: "Изменить категорие",
+      add_category: "Добавить категорие",
+      category: "категорие",
     },
   },
   uz: {
