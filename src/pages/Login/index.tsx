@@ -83,9 +83,7 @@ const Login = () => {
             <p className={"text-sm text-red-400"}>{t("incorrect_username")}</p>
           )}
 
-          <button type="submit" className="hidden">
-            submit
-          </button>
+          <button type="submit">{t("Auth")}</button>
         </form>
 
         <div className="max-w-[24vw] w-full">

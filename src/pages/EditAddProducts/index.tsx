@@ -38,9 +38,10 @@ const EditAddProducts = () => {
   } = useForm();
 
   const onSubmit = () => {
-    const { status, validity, description, qr, category } = getValues();
+    const { status, validity, description, qr, category, name } = getValues();
     mutate(
       {
+        name: name,
         status: +status,
         validity: +validity,
         description,
@@ -61,6 +62,7 @@ const EditAddProducts = () => {
   useEffect(() => {
     if (data) {
       reset({
+        name: product.name,
         description: product.description,
         status: !!product.status,
         validity: product.validity,
@@ -79,6 +81,9 @@ const EditAddProducts = () => {
       </Header>
 
       <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
+        <BaseInputs label="name" error={errors.validity}>
+          <MainInput register={register("name")} />
+        </BaseInputs>
         <BaseInputs label="validity" error={errors.validity}>
           <MainInput
             type="number"

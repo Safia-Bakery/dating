@@ -4,6 +4,7 @@ import apiClient from "@/main";
 interface Body {
   validity: number;
   status?: number;
+  name: string;
   id?: string;
   description?: string;
   qr: string;
