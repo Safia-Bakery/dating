@@ -33,6 +33,11 @@ const Users = () => {
         cell: (info) => info.getValue(),
       },
       {
+        accessorKey: "username",
+        header: t("username"),
+        cell: (info) => info.getValue(),
+      },
+      {
         accessorKey: "action",
         header: "",
         size: 10,
