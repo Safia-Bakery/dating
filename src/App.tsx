@@ -17,6 +17,8 @@ const Products = lazy(() => import("@/pages/Products"));
 const Groups = lazy(() => import("@/pages/Groups"));
 const Templates = lazy(() => import("@/pages/Templates"));
 const Categories = lazy(() => import("@/pages/Categories"));
+const Users = lazy(() => import("@/pages/Users"));
+const EditUser = lazy(() => import("@/pages/EditUser"));
 const EditAddCategory = lazy(() => import("@/pages/EditAddCategory"));
 
 const App = () => {
@@ -58,10 +60,34 @@ const App = () => {
         path={"/"}
       >
         <Route
+          path={"*"}
+          element={
+            <Suspend>
+              <Products />
+            </Suspend>
+          }
+        />
+        <Route
           path={"products"}
           element={
             <Suspend>
               <Products />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"users"}
+          element={
+            <Suspend>
+              <Users />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"users/:id"}
+          element={
+            <Suspend>
+              <EditUser />
             </Suspend>
           }
         />

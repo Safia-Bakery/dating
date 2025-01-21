@@ -47,6 +47,8 @@ const localization = {
       edit_category: "Изменить категорие",
       add_category: "Добавить категорие",
       category: "категорие",
+      select_category: "Выберите категории...",
+      users: "Пользователи",
     },
   },
   uz: {

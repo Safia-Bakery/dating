@@ -62,3 +62,16 @@ export interface CategoryType {
   name: string;
   status?: number;
 }
+
+export interface UserRes {
+  id: number;
+  username: string;
+  full_name: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  categories?: {
+    id: number;
+    name: string;
+  }[];
+}

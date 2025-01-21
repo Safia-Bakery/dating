@@ -83,7 +83,12 @@ const Login = () => {
             <p className={"text-sm text-red-400"}>{t("incorrect_username")}</p>
           )}
 
-          <button type="submit">{t("Auth")}</button>
+          <button
+            type="submit"
+            className="bg-lightBrown py-2 rounded-xl text-white"
+          >
+            {t("Auth")}
+          </button>
         </form>
 
         <div className="max-w-[24vw] w-full">

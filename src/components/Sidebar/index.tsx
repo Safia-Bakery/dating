@@ -30,6 +30,11 @@ const routes = [
     icon: "/images/templates.png",
     hasLine: true,
   },
+  {
+    name: "users",
+    url: "/users",
+    icon: "/icons/users.svg",
+  },
 ];
 
 const Sidebar = () => {
@@ -40,7 +45,6 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   const handleLogout = () => dispatch(logoutHandler());
-
   const closeSidebar = () => {
     if (isMobile) dispatch(sidebarHandler(false));
   };
