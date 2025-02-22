@@ -62,7 +62,7 @@ const EditUser = () => {
   return (
     <Card className="pb-3 min-h-96">
       <Header title={`Изменить ${data?.full_name}`}>
-        <Button green onClick={goBack}>
+        <Button className="btn-primary" onClick={goBack}>
           {t("back")}
         </Button>
       </Header>
@@ -83,7 +83,7 @@ const EditUser = () => {
           />
         </BaseInput>
 
-        <Button green onClick={onSubmit} className="mt-4 float-end">
+        <Button onClick={onSubmit} className="mt-4 float-end btn-primary">
           {t("save")}
         </Button>
       </div>

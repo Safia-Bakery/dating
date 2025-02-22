@@ -20,6 +20,10 @@ const Categories = lazy(() => import("@/pages/Categories"));
 const Users = lazy(() => import("@/pages/Users"));
 const EditUser = lazy(() => import("@/pages/EditUser"));
 const EditAddCategory = lazy(() => import("@/pages/EditAddCategory"));
+const CategoriesFactory = lazy(() => import("@/pages/CategoriesFactory"));
+const EditAddCategoryFactory = lazy(
+  () => import("@/pages/EditAddCategoryFactory")
+);
 
 const App = () => {
   const lang = useAppSelector(langSelector);
@@ -144,6 +148,31 @@ const App = () => {
           element={
             <Suspend>
               <EditAddProducts />
+            </Suspend>
+          }
+        />
+
+        <Route
+          path={"category_factory"}
+          element={
+            <Suspend>
+              <CategoriesFactory />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"category_factory/:id"}
+          element={
+            <Suspend>
+              <EditAddCategoryFactory />
+            </Suspend>
+          }
+        />
+        <Route
+          path={"category_factory/add"}
+          element={
+            <Suspend>
+              <EditAddCategoryFactory />
             </Suspend>
           }
         />

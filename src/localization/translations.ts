@@ -49,6 +49,10 @@ const localization = {
       category: "категорие",
       select_category: "Выберите категории...",
       users: "Пользователи",
+      category_factory: "Категории производства",
+      is_returnable: "Возврат",
+      yes: "Да",
+      no: "Нет",
     },
   },
   uz: {

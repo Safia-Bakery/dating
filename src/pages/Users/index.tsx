@@ -64,7 +64,7 @@ const Users = () => {
   return (
     <Card>
       <AdminHeader title={t("users")} className="mb-2">
-        <Button green onClick={goBack} className="btn btn-success btn-fill">
+        <Button onClick={goBack} className="btn btn-primary btn-fill">
           {t("back")}
         </Button>
       </AdminHeader>

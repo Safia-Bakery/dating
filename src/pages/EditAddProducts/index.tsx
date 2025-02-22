@@ -75,7 +75,7 @@ const EditAddProducts = () => {
   return (
     <Card>
       <Header title={`${t("edit")} ${product.name}`}>
-        <Button green className="btn btn-success btn-fill" onClick={goBack}>
+        <Button className="btn btn-primary btn-fill" onClick={goBack}>
           {t("back")}
         </Button>
       </Header>
@@ -108,7 +108,7 @@ const EditAddProducts = () => {
           <MainCheckBox label={"active"} register={register("status")} />
         </BaseInputs>
 
-        <Button green type="submit" className="mt-3">
+        <Button type="submit" className="mt-3 btn-primary">
           {t("save")}
         </Button>
       </form>

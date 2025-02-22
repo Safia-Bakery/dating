@@ -25,6 +25,12 @@ const routes = [
     icon: "/icons/categories.svg",
   },
   {
+    name: "category_factory",
+    url: "/category_factory",
+    icon: "/icons/categories.svg",
+    hasLine: true,
+  },
+  {
     name: "templates",
     url: "/templates",
     icon: "/images/templates.png",

@@ -70,7 +70,7 @@ const EditAddCategory = () => {
   return (
     <Card className="overflow-hidden pb-3">
       <Header title={!id ? "add_category" : "edit_category"}>
-        <Button green onClick={goBack}>
+        <Button className="btn-primary" onClick={goBack}>
           {t("back")}
         </Button>
       </Header>
@@ -83,7 +83,7 @@ const EditAddCategory = () => {
 
         <MainCheckBox label={"active"} register={register("status")} />
 
-        <Button green type="submit" className="mt-4 float-end">
+        <Button type="submit" className="mt-4 float-end btn-primary">
           {t("save")}
         </Button>
       </form>

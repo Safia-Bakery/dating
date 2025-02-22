@@ -81,7 +81,7 @@ const Products = () => {
   return (
     <Card>
       <AdminHeader title={t("products")} className="mb-2">
-        <Button green onClick={goBack} className="btn btn-success btn-fill">
+        <Button onClick={goBack} className="btn btn-success btn-fill">
           {t("back")}
         </Button>
       </AdminHeader>
