@@ -82,7 +82,6 @@ const EditAddCategoryFactory = () => {
     enabled: !!id,
     ...(name && { name }),
   });
-
   const {
     register,
     handleSubmit,
@@ -165,9 +164,7 @@ const EditAddCategoryFactory = () => {
         </Header>
         <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
           <BaseInput label="name_in_table" error={errors.name}>
-            <MainInput
-              register={register("name", { required: t("required_field") })}
-            />
+            <MainInput register={register("name")} />
           </BaseInput>
 
           {!!id && (
@@ -227,11 +224,7 @@ const EditAddCategoryFactory = () => {
               </Header>
               <form onSubmit={handleSubmit(prodSubmit)} className="p-4">
                 <BaseInput label="name_in_table" error={errors.prod_name}>
-                  <MainInput
-                    register={register("prod_name", {
-                      required: t("required_field"),
-                    })}
-                  />
+                  <MainInput register={register("prod_name")} />
                 </BaseInput>
 
                 <BaseInput label="validity">
