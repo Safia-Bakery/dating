@@ -25,6 +25,7 @@ import TableViewBtn from "@/components/TableViewBtn";
 import useQueryString from "@/hooks/custom/useQueryString";
 import { handleIdx } from "@/utils/helpers";
 import Modal from "@/components/Modal";
+import { useNavigateParams } from "@/hooks/custom/useCustomNavigate";
 
 const column = [
   { name: "№", key: "" },
@@ -39,6 +40,8 @@ const EditAddCategoryFactory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const name = useQueryString("name");
+  const prod_name = useQueryString("prod_name");
+  const navigateParams = useNavigateParams();
   const [modal, $modal] = useState(false);
   const [selectedProd, $selectedProd] = useState<string>();
 
@@ -194,6 +197,21 @@ const EditAddCategoryFactory = () => {
                 <TableHead column={column} data={products} />
 
                 <tbody>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <MainInput
+                        register={register("prod_name")}
+                        onKeyDown={(e) =>
+                          e.key === "Enter" &&
+                          navigateParams({ name: getValues("prod_name") })
+                        }
+                      />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                   {!!products?.length &&
                     products?.map((product, idx) => (
                       <tr key={idx} className="bg-blue">
