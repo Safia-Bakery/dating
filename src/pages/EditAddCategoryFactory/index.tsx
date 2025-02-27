@@ -40,7 +40,6 @@ const EditAddCategoryFactory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const name = useQueryString("name");
-  const prod_name = useQueryString("prod_name");
   const navigateParams = useNavigateParams();
   const [modal, $modal] = useState(false);
   const [selectedProd, $selectedProd] = useState<string>();
@@ -94,10 +93,10 @@ const EditAddCategoryFactory = () => {
   } = useForm();
 
   const prodSubmit = () => {
-    const { prod_name, validity, is_returnable } = getValues();
+    const { name, validity, is_returnable } = getValues();
     categoryProdMutation(
       {
-        name: prod_name,
+        name: name,
         validity: Number(validity),
         is_returnable: Number(is_returnable),
         category_id: Number(id),
@@ -140,6 +139,7 @@ const EditAddCategoryFactory = () => {
       reset({
         name: category?.name,
         status: !!category.status,
+        prod_name: name,
       });
     }
   }, [category]);
@@ -147,7 +147,7 @@ const EditAddCategoryFactory = () => {
   useEffect(() => {
     if (categoryProd && !!selectedProd) {
       reset({
-        prod_name: categoryProd?.name,
+        name: categoryProd?.name,
         is_returnable: categoryProd.is_returnable,
         validity: categoryProd.validity,
       });
@@ -231,7 +231,7 @@ const EditAddCategoryFactory = () => {
               {(isLoading || isPending) && <Loading />}
               {!products?.length && !isLoading && <EmptyList />}
             </div>
-            <Modal isOpen={modal} onClose={closeModal}>
+            <Modal isOpen={modal} onClose={closeModal} className="min-w-96">
               <Header
                 title={!selectedProd ? t("add") : t("edit_product")}
                 className="p-3"
@@ -241,8 +241,8 @@ const EditAddCategoryFactory = () => {
                 </button>
               </Header>
               <form onSubmit={handleSubmit(prodSubmit)} className="p-4">
-                <BaseInput label="name_in_table" error={errors.prod_name}>
-                  <MainInput register={register("prod_name")} />
+                <BaseInput label="name_in_table" error={errors.name}>
+                  <MainInput register={register("name")} />
                 </BaseInput>
 
                 <BaseInput label="validity">
