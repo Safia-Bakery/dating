@@ -53,6 +53,7 @@ const localization = {
       is_returnable: "Возврат",
       yes: "Да",
       no: "Нет",
+      temperature: "Температура хранения",
     },
   },
   uz: {

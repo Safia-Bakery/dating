@@ -30,6 +30,7 @@ import { useNavigateParams } from "@/hooks/custom/useCustomNavigate";
 const column = [
   { name: "№", key: "" },
   { name: "name_in_table", key: "name" },
+  { name: "temperature", key: "temperature" },
   { name: "date_expire", key: "date_expire" },
   { name: "is_returnable", key: "is_returnable" },
   { name: "", key: "" },
@@ -93,13 +94,15 @@ const EditAddCategoryFactory = () => {
   } = useForm();
 
   const prodSubmit = () => {
-    const { name, validity, is_returnable } = getValues();
+    const { selected_prod_name, validity, is_returnable, temperature } =
+      getValues();
     categoryProdMutation(
       {
-        name: name,
+        name: selected_prod_name,
         validity: Number(validity),
         is_returnable: Number(is_returnable),
         category_id: Number(id),
+        temperature,
         ...(!!id && { id: selectedProd }),
       },
       {
@@ -147,15 +150,15 @@ const EditAddCategoryFactory = () => {
   useEffect(() => {
     if (categoryProd && !!selectedProd) {
       reset({
-        name: categoryProd?.name,
+        selected_prod_name: categoryProd?.name,
         is_returnable: categoryProd.is_returnable,
         validity: categoryProd.validity,
+        temperature: categoryProd.temperature,
       });
     }
   }, [categoryProd, selectedProd]);
 
-  if (((isLoading || prodsLoading) && !!id) || (prodLoading && selectedProd))
-    return <Loading />;
+  if ((isLoading || prodsLoading) && !!id) return <Loading />;
 
   return (
     <>
@@ -211,12 +214,14 @@ const EditAddCategoryFactory = () => {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                   </tr>
                   {!!products?.length &&
                     products?.map((product, idx) => (
                       <tr key={idx} className="bg-blue">
                         <td width="40">{handleIdx(idx)}</td>
                         <td>{product?.name}</td>
+                        <td>{product?.temperature}</td>
                         <td>{product?.validity}</td>
                         <td>{product?.is_returnable ? t("yes") : t("no")}</td>
                         <td width={40}>
@@ -241,12 +246,19 @@ const EditAddCategoryFactory = () => {
                 </button>
               </Header>
               <form onSubmit={handleSubmit(prodSubmit)} className="p-4">
-                <BaseInput label="name_in_table" error={errors.name}>
-                  <MainInput register={register("name")} />
+                <BaseInput
+                  label="name_in_table"
+                  error={errors.selected_prod_name}
+                >
+                  <MainInput register={register("selected_prod_name")} />
                 </BaseInput>
 
                 <BaseInput label="validity">
                   <MainInput type="number" register={register("validity")} />
+                </BaseInput>
+
+                <BaseInput label="temperature">
+                  <MainInput register={register("temperature")} />
                 </BaseInput>
 
                 <MainCheckBox

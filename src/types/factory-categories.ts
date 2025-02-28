@@ -15,6 +15,7 @@ interface FactoryCategoryProdsRes {
   validity: number;
   is_returnable: number;
   id: string;
+  temperature: string;
 }
 
 interface FactoryProductsBody {
@@ -22,7 +23,7 @@ interface FactoryProductsBody {
   validity: number;
   is_returnable: number;
   category_id: number;
-
+  temperature?: string;
   id?: string;
 }
 
