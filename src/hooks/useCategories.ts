@@ -18,7 +18,7 @@ export const useCategories = ({ enabled, ...params }: Body) => {
     queryKey: ["categories", params],
     queryFn: () =>
       apiClient
-        .get({ url: "/v1/category", params })
+        .get({ url: "/v1/category", params: { ...params, size: 100 } })
         .then(({ data: response }) => response as CategoriesType),
     enabled: enabled && !!token,
   });
